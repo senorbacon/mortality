@@ -11,9 +11,15 @@ NOTE: the data file `2015_data.csv` is too large to store in this repo. Please d
 
 The data itself is rendered as a graph in [Neo4j](https://neo4j.com/ "Neo4j") version 3.4. APOC plugin is required. Current strategy is to render all mortality data as specific nodes, linked to single "Death" node via specific relationships.  For example:
 
-(Death) -[:HAS_SEX]-> (sex {key: "M", value: "Male"})
+(:Death) -[:HAS_SEX]-> (:Sex {key: "M", value: "Male"})
 
 One challenge is that there is no uniquely identifying data for a given death in the data files. As Neo4J does not provide any sort of auto-increment, we need to reference the line number in the CSV as the unique identifier. This is why the `apoc.load.csv` call is required to load the data, rather than `LOAD CSV` Cypher construct.
+
+####Example queries
+Accidental deaths that occured on a Monday, returning all dimensions for resulting deaths:
+`MATCH (:Day_of_week_of_death {value: "Monday"})<-[]-(d:Death)-[]->(:Manner_of_death {value: "Accident"}) 
+    WITH d MATCH (d)-[*]->(dim) 
+    RETURN d, labels(dim)[0] as dimension, dim.value as value;`
 
 ### API / backend
 API is https://graphql.org/, running on a serverless backend (Node locally).
