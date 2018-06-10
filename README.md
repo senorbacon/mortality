@@ -16,10 +16,21 @@ The data itself is rendered as a graph in [Neo4j](https://neo4j.com/ "Neo4j") ve
 One challenge is that there is no uniquely identifying data for a given death in the data files. As Neo4J does not provide any sort of auto-increment, we need to reference the line number in the CSV as the unique identifier. This is why the `apoc.load.csv` call is required to load the data, rather than `LOAD CSV` Cypher construct.
 
 ####Example queries
+Count how many people died of emphysema:
+Emphysema
+`MATCH (:_358_cause_recode {key: "266"})<-[r]-(:Death) RETURN count(r);`
+
 Accidental deaths that occured on a Monday, returning all dimensions for resulting deaths:
 `MATCH (:Day_of_week_of_death {value: "Monday"})<-[]-(d:Death)-[]->(:Manner_of_death {value: "Accident"}) 
     WITH d MATCH (d)-[*]->(dim) 
     RETURN d, labels(dim)[0] as dimension, dim.value as value;`
+
+People with a doctorate degree who were the victims of homicide via gun violence:
+`MATCH (:Education_2003_revision {value: "Doctorate or professional degree"})<-[]-(d:Death)-[]->(:_358_cause_recode {key: "435"}) 
+    WITH d MATCH (d)-[*]->(dim) 
+    RETURN d, labels(dim)[0] as dimension, dim.value as value;`
+
+
 
 ### API / backend
 API is https://graphql.org/, running on a serverless backend (Node locally).
