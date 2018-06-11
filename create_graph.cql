@@ -4,7 +4,7 @@ CREATE CONSTRAINT ON (d:Death) ASSERT d.id IS UNIQUE;
 // load death data and link to dimension nodes
 // create ICD categories
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Resident_status {key: map.`resident_status`})
@@ -13,7 +13,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Education_1989_revision {key: map.`education_1989_revision`})
@@ -22,7 +22,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Education_2003_revision {key: map.`education_2003_revision`})
@@ -31,7 +31,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Education_reporting_flag {key: map.`education_reporting_flag`})
@@ -40,7 +40,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Month_of_death {key: map.`month_of_death`})
@@ -49,7 +49,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Sex {key: map.`sex`})
@@ -58,7 +58,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Detail_age_type {key: map.`detail_age_type`})
@@ -67,7 +67,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Detail_age {key: map.`detail_age`})
@@ -76,7 +76,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Age_substitution_flag {key: map.`age_substitution_flag`})
@@ -85,7 +85,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Age_recode_52 {key: map.`age_recode_52`})
@@ -94,7 +94,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Age_recode_27 {key: map.`age_recode_27`})
@@ -103,7 +103,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Age_recode_12 {key: map.`age_recode_12`})
@@ -112,7 +112,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Infant_age_recode_22 {key: map.`infant_age_recode_22`})
@@ -121,7 +121,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Place_of_death_and_decedents_status {key: map.`place_of_death_and_decedents_status`})
@@ -130,7 +130,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Marital_status {key: map.`marital_status`})
@@ -139,7 +139,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Day_of_week_of_death {key: map.`day_of_week_of_death`})
@@ -148,7 +148,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Injury_at_work {key: map.`injury_at_work`})
@@ -157,7 +157,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Manner_of_death {key: map.`manner_of_death`})
@@ -166,7 +166,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Method_of_disposition {key: map.`method_of_disposition`})
@@ -175,7 +175,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Autopsy {key: map.`autopsy`})
@@ -184,7 +184,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Activity_code {key: map.`activity_code`})
@@ -193,7 +193,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Place_of_injury_for_causes_w00_y34_except_y06_and_y07_ {key: map.`place_of_injury_for_causes_w00_y34_except_y06_and_y07_`})
@@ -202,7 +202,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Icd_code_10th_revision {key: map.`icd_code_10th_revision`})
@@ -211,7 +211,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:_358_cause_recode {key: map.`358_cause_recode`})
@@ -220,7 +220,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:_113_cause_recode {key: map.`113_cause_recode`})
@@ -229,7 +229,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:_130_infant_cause_recode {key: map.`130_infant_cause_recode`})
@@ -238,7 +238,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:_39_cause_recode {key: map.`39_cause_recode`})
@@ -247,7 +247,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Race {key: map.`race`})
@@ -256,7 +256,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Bridged_race_flag {key: map.`bridged_race_flag`})
@@ -265,7 +265,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Race_imputation_flag {key: map.`race_imputation_flag`})
@@ -274,7 +274,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Race_recode_3 {key: map.`race_recode_3`})
@@ -283,7 +283,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Race_recode_5 {key: map.`race_recode_5`})
@@ -292,7 +292,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Hispanic_origin {key: map.`hispanic_origin`})
@@ -301,7 +301,7 @@ CALL apoc.periodic.iterate("
 ", {batchSize:100, iterateList:true});
 
 CALL apoc.periodic.iterate("
-    CALL apoc.load.csv('file:///c:/git/mortality/data/z.csv') YIELD lineNo, list, map", "
+    CALL apoc.load.csv('file:///c:/git/mortality/data/2015_data.csv') YIELD lineNo, list, map", "
     MERGE (d:Death {id: lineNo})
     WITH d, map
     MATCH (n:Hispanic_originrace_recode {key: map.`hispanic_originrace_recode`})
