@@ -20,6 +20,19 @@ Count how many people died of emphysema:
 Emphysema
 `MATCH (:_358_cause_recode {key: "266"})<-[r]-(:Death) RETURN count(r);`
 
+Count how many men vs women died of emphysema:
+`MATCH (:_358_cause_recode {key: "266"})<--(:Death)-[r:HAS_SEX]->(s) RETURN s, count(r);`
+
+Count of different activity codes for homicides/suicides:
+`MATCH (:Manner_of_death {value: "Homicide"})<--(:Death)-[r:HAS_ACTIVITY_CODE]->(a) RETURN a, count(r);`
+`MATCH (:Manner_of_death {value: "Suicide"})<--(:Death)-[r:HAS_ACTIVITY_CODE]->(a) RETURN a, count(r);`
+
+Count of causes of death for sports-related injuries:
+`MATCH (:Activity_code {key: "0"})<--(:Death)-[r:HAS_358_CAUSE_RECODE]->(c) RETURN c, count(r);`
+
+Count of causes of death for work-related injuries:
+`MATCH (:Injury_at_work {key: "Y"})<--(:Death)-[r:HAS_358_CAUSE_RECODE]->(c) RETURN c, count(r);`
+
 Accidental deaths that occured on a Monday, returning all dimensions for resulting deaths:
 `MATCH (:Day_of_week_of_death {value: "Monday"})<-[]-(d:Death)-[]->(:Manner_of_death {value: "Accident"}) 
     WITH d MATCH (d)-[*]->(dim) 
