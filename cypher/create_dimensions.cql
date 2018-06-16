@@ -32,9 +32,15 @@ WITH dim, dim_key, n,
             // also, capitalize labels
             THEN toUpper(left(k, 1)) + substring(k, 1) 
         ELSE "_" + k 
-    END as label
+    END as label,
+    CASE 
+        // if key is a number, store it as a number, not a string
+        WHEN toInteger(dim_key) is null 
+            THEN dim_key 
+        ELSE toInteger(dim_key)
+    END as dim_key_typed
 CALL apoc.create.addLabels(id(n), [ label ]) YIELD node
-CALL apoc.create.setProperty(node, "key", dim_key) yield node as n2
+CALL apoc.create.setProperty(node, "key", dim_key_typed) yield node as n2
 CALL apoc.create.setProperty(node, "value", dim[dim_key]) yield node as n3
 RETURN n3;
 
