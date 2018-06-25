@@ -18,17 +18,17 @@ One challenge is that there is no uniquely identifying data for a given death in
 #### Example queries
 Count how many people died of emphysema:
 Emphysema
-`MATCH (:_358_cause_recode {key: "266"})<-[r]-(:Death) RETURN count(r);`
+`MATCH (:_358_cause_recode {key: 266})<-[r]-(:Death) RETURN count(r);`
 
 Count how many men vs women died of emphysema:
-`MATCH (:_358_cause_recode {key: "266"})<--(:Death)-[r:HAS_SEX]->(s) RETURN s, count(r) as count order by count desc;`
+`MATCH (:_358_cause_recode {key: 266})<--(:Death)-[r:HAS_SEX]->(s) RETURN s, count(r) as count order by count desc;`
 
 Count of different activity codes for homicides/suicides:
 `MATCH (:Manner_of_death {value: "Homicide"})<--(:Death)-[r:HAS_ACTIVITY_CODE]->(a) RETURN a, count(r) as count order by count desc;`
 `MATCH (:Manner_of_death {value: "Suicide"})<--(:Death)-[r:HAS_ACTIVITY_CODE]->(a) RETURN a, count(r) as count order by count desc;`
 
 Count of causes of death for sports-related injuries:
-`MATCH (:Activity_code {key: "0"})<--(:Death)-[r:HAS_358_CAUSE_RECODE]->(c) RETURN c, count(r) as count order by count desc;`
+`MATCH (:Activity_code {key: 0})<--(:Death)-[r:HAS_358_CAUSE_RECODE]->(c) RETURN c, count(r) as count order by count desc;`
 
 Count of causes of death for work-related injuries:
 `MATCH (:Injury_at_work {key: "Y"})<--(:Death)-[r:HAS_358_CAUSE_RECODE]->(c) RETURN c, count(r) as count order by count desc;`
@@ -36,14 +36,15 @@ Count of causes of death for work-related injuries:
 Accidental deaths that occured on a Monday, returning all dimensions for resulting deaths:
 `MATCH (:Day_of_week_of_death {value: "Monday"})<-[]-(d:Death)-[]->(:Manner_of_death {value: "Accident"}) 
     WITH d MATCH (d)-[*]->(dim) 
-    RETURN d, labels(dim)[0] as dimension, dim.value as value;`
+    RETURN d, labels(dim)[0] as dimension, dim.value as value LIMIT 1000;`
 
 People with a doctorate degree who were the victims of homicide via gun violence:
-`MATCH (:Education_2003_revision {value: "Doctorate or professional degree"})<-[]-(d:Death)-[]->(:_358_cause_recode {key: "435"}) 
+`MATCH (:Education_2003_revision {value: "Doctorate or professional degree"})<-[]-(d:Death)-[]->(:_358_cause_recode {key: 435}) 
     WITH d MATCH (d)-[*]->(dim) 
     RETURN d, labels(dim)[0] as dimension, dim.value as value;`
 
-
+People who died of herpes
+`MATCH (:Death)-[r:HAS_358_CAUSE_RECODE]->(c {key: 42}) RETURN c, count(r) as count order by count desc;`
 
 ### API / backend
 API is https://graphql.org/, running on a serverless backend (Node locally).
