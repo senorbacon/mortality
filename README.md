@@ -3,7 +3,7 @@ Explore US Mortality data.
 
 Original data set is from [this Kaggle project](https://www.kaggle.com/cdc/mortality "Kaggle"), which in turn is based on public CDC data from 2015. 
 
-ICD codes are taken from [this Github repo](http://https://github.com/kamillamagna/ICD-10-CSV "this Github repo") and are from 2018. 2015 codes are available [here](https://www.cdc.gov/nchs/icd/icd10cm.htm "here") but only in XML form. I will convert to CSV only if the 2018 codes have changed significantly enough to make the 2015 mortality data problematic.
+ICD codes are taken from [this Github repo](https://github.com/kamillamagna/ICD-10-CSV "this Github repo") and are from 2018. 2015 codes are available [here](https://www.cdc.gov/nchs/icd/icd10cm.htm "here") but only in XML form. I will convert to CSV only if the 2018 codes have changed significantly enough to make the 2015 mortality data problematic.
 
 ## Technical details
 ### Data model
