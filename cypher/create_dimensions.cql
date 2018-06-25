@@ -1,18 +1,20 @@
+// set up uniqueness indexes
+CREATE CONSTRAINT ON (d:Death) ASSERT d.id IS UNIQUE;
+CREATE CONSTRAINT ON (category:ICD_Category) ASSERT category.code IS UNIQUE;
+CREATE CONSTRAINT ON (code:ICD_Code) ASSERT code.code IS UNIQUE;
+
+// set up composite index on log nodes
+CREATE INDEX ON :Log(event_type, node_ref, value);
+
 // create ICD categories
 USING PERIODIC COMMIT 500
 LOAD CSV WITH HEADERS FROM "file:///2018_icd_categories.csv" AS line WITH line
 CREATE (c:ICD_Category {code: line.`Category Code`, title: line.`Category Title`});
 
-// set up index/constraint
-CREATE CONSTRAINT ON (category:ICD_Category) ASSERT category.code IS UNIQUE;
-
 // create ICD Codes
 USING PERIODIC COMMIT 500
 LOAD CSV WITH HEADERS FROM "file:///2018_icd_codes.csv" AS line WITH line
 CREATE (c:ICD_Code {code: line.`Full Code`, categoryCode: line.`Category Code`, description: line.`Full Description`});
-
-// set up index/constraint
-CREATE CONSTRAINT ON (code:ICD_Code) ASSERT code.code IS UNIQUE;
 
 // link codes to categories
 MATCH (code:ICD_Code), (category:ICD_Category {code: code.categoryCode})
