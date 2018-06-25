@@ -43,43 +43,44 @@ The dimension data comes from Kaggle as well (see data/2015_dimensions.json). IC
 In either case, we want to know if our death data is failing to create a relationship to a dimension node. 
 
 #### Example queries
+
 Count how many people died of emphysema:
 
-`MATCH (:_358_cause_recode {key: 266})<-[r]-(:Death) RETURN count(r);`
+`MATCH (:_358_cause_recode {key: 266})<-[r:HAS_358_CAUSE_RECODE]-(:Death) RETURN count(r);`
 
 Count how many men vs women died of emphysema:
 
-`MATCH (:_358_cause_recode {key: 266})<--(:Death)-[r:HAS_SEX]->(s) RETURN s, count(r) as count order by count desc;`
+`MATCH (:_358_cause_recode {key: 266})<-[:HAS_358_CAUSE_RECODE]-(:Death)-[r:HAS_SEX]->(s) RETURN s, count(r) AS count ORDER BY count DESC;`
 
 Count of different activity codes for homicides/suicides:
 
-`MATCH (:Manner_of_death {value: "Homicide"})<--(:Death)-[r:HAS_ACTIVITY_CODE]->(a) RETURN a, count(r) as count order by count desc;`
+`MATCH (:Manner_of_death {value: "Homicide"})<-[:HAS_MANNER_OF_DEATH]-(:Death)-[r:HAS_ACTIVITY_CODE]->(a) RETURN a, count(r) AS count ORDER BY count DESC;`
 
-`MATCH (:Manner_of_death {value: "Suicide"})<--(:Death)-[r:HAS_ACTIVITY_CODE]->(a) RETURN a, count(r) as count order by count desc;`
+`MATCH (:Manner_of_death {value: "Suicide"})<-[:HAS_MANNER_OF_DEATH]-(:Death)-[r:HAS_ACTIVITY_CODE]->(a) RETURN a, count(r) AS count ORDER BY count DESC;`
 
 Count of causes of death for sports-related injuries:
 
-`MATCH (:Activity_code {key: 0})<--(:Death)-[r:HAS_358_CAUSE_RECODE]->(c) RETURN c, count(r) as count order by count desc;`
+`MATCH (:Activity_code {key: 0})<-[:HAS_ACTIVITY_CODE]-(:Death)-[r:HAS_358_CAUSE_RECODE]->(c) RETURN c, count(r) AS count ORDER BY count DESC;`
 
 Count of causes of death for work-related injuries:
 
-`MATCH (:Injury_at_work {key: "Y"})<--(:Death)-[r:HAS_358_CAUSE_RECODE]->(c) RETURN c, count(r) as count order by count desc;`
+`MATCH (:Injury_at_work {key: "Y"})<-[:HAS_INJURY_AT_WORK]-(:Death)-[r:HAS_358_CAUSE_RECODE]->(c) RETURN c, count(r) AS count ORDER BY count DESC;`
 
-Accidental deaths that occured on a Monday, returning all dimensions for resulting deaths:
+Accidental deaths that occured on a Monday, returning counts of all dimensions:
 
-`MATCH (:Day_of_week_of_death {value: "Monday"})<-[]-(d:Death)-[]->(:Manner_of_death {value: "Accident"}) 
+`MATCH (:Day_of_week_of_death {value: "Monday"}) <-[:HAS_DAY_OF_WEEK_OF_DEATH]- (d:Death) -[:HAS_MANNER_OF_DEATH]-> (:Manner_of_death {value: "Accident"}) 
     WITH d MATCH (d)-[*]->(dim) 
-    RETURN d, labels(dim)[0] as dimension, dim.value as value LIMIT 1000;`
+    RETURN labels(dim)[0] AS dimension, dim.value AS value, count(dim.value) as count ORDER BY dimension, count DESC;`
 
 People with a doctorate degree who were the victims of homicide via gun violence:
 
-`MATCH (:Education_2003_revision {value: "Doctorate or professional degree"})<-[]-(d:Death)-[]->(:_358_cause_recode {key: 435}) 
+`MATCH (:Education_2003_revision {key: 8}) <-[:HAS_EDUCATION_2003_REVISION]- (d:Death) -[:HAS_358_CAUSE_RECODE]->(:_358_cause_recode {key: 435}) 
     WITH d MATCH (d)-[*]->(dim) 
-    RETURN d, labels(dim)[0] as dimension, dim.value as value;`
+    RETURN labels(dim)[0] AS dimension, dim.value AS value, count(dim.value) as count ORDER BY dimension, count DESC;`
 
 People who died of herpes:
 
-`MATCH (:Death)-[r:HAS_358_CAUSE_RECODE]->(c {key: 42}) RETURN c, count(r) as count order by count desc;`
+`MATCH (:Death)-[r:HAS_358_CAUSE_RECODE]->(c {key: 42}) RETURN c, count(r) AS count ORDER BY count DESC;`
 
 ### API / backend
 API is https://graphql.org/, running on a serverless backend (Node locally).
