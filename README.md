@@ -1,5 +1,16 @@
 # Mortality Explorer
-Explore US Mortality data. 
+Explore US Mortality data using the GRAND stack. Work on this is ongoing and contributions are welcome!
+
+## Current status:
+
+- Data from 2015 is now modeled in Neo4j
+- Data is validated and errors logged 
+- Need mortality data from other years
+- Need to link ICD values in mortality CSV to ICD nodes
+- Currently building GraphQL Schema and node server
+- No work done on React front end yet
+
+## Data Sources
 
 Original data set is from [this Kaggle project](https://www.kaggle.com/cdc/mortality "Kaggle"), which in turn is based on public CDC data from 2015. 
 
@@ -43,6 +54,7 @@ Count how many men vs women died of emphysema:
 Count of different activity codes for homicides/suicides:
 
 `MATCH (:Manner_of_death {value: "Homicide"})<--(:Death)-[r:HAS_ACTIVITY_CODE]->(a) RETURN a, count(r) as count order by count desc;`
+
 `MATCH (:Manner_of_death {value: "Suicide"})<--(:Death)-[r:HAS_ACTIVITY_CODE]->(a) RETURN a, count(r) as count order by count desc;`
 
 Count of causes of death for sports-related injuries:
